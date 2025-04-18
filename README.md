@@ -1,1 +1,44 @@
-# Task-2
+portfolio = {}
+
+def add_stock(symbol, shares, price):
+    symbol = symbol.upper()
+    portfolio[symbol] = {"shares": shares, "price": price}
+    print(f"Added {shares} shares of {symbol} at ${price} each.")
+
+def remove_stock(symbol):
+    symbol = symbol.upper()
+    if symbol in portfolio:
+        del portfolio[symbol]
+        print(f"Removed {symbol} from portfolio.")
+    else:
+        print(f"{symbol} not found.")
+
+def show_portfolio():
+    total = 0
+    print("\nYour Portfolio:")
+    for symbol, data in portfolio.items():
+        value = data["shares"] * data["price"]
+        print(f"{symbol}: {data['shares']} × ${data['price']} = ${value}")
+        total += value
+    print(f"Total Portfolio Value: ${total}\n")
+
+while True:
+    print("1. Add Stock")
+    print("2. Remove Stock")
+    print("3. Show Portfolio")
+    print("4. Exit")
+    choice = input("Choose an option: ")
+    if choice == "1":
+        sym = input("Enter stock symbol: ")
+        qty = int(input("Enter number of shares: "))
+        prc = float(input("Enter price per share: "))
+        add_stock(sym, qty, prc)
+    elif choice == "2":
+        sym = input("Enter stock symbol to remove: ")
+        remove_stock(sym)
+    elif choice == "3":
+        show_portfolio()
+    elif choice == "4":
+        break
+    else:
+        print("Invalid choice.")
